@@ -39,7 +39,7 @@ public class TelaLogin extends JFrame {
 		setResizable(false);
 		setVisible(true);
 		setTitle("Livraria Amazonia - LOGIN");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 449, 301);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -14,21 +14,16 @@ import javax.swing.JTabbedPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JanelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
 	private JTable table;
 
-	/**
-	 * Create the frame.
-	 */
 	public JanelaPrincipal() {
 		setResizable(false);
 		setTitle("Livraria Amazonia");
@@ -50,104 +45,67 @@ public class JanelaPrincipal extends JFrame {
 		contentPane.add(painelPrincipal);
 		painelPrincipal.setLayout(null);
 		
+		JLabel lblSolustechSoftwares = new JLabel("SolusTech softwares");
+		lblSolustechSoftwares.setBounds(353, 546, 145, 14);
+		painelPrincipal.add(lblSolustechSoftwares);
+		
 		JLabel lblLivraria = new JLabel("Livraria Amazonia");
 		lblLivraria.setFont(new Font("Monotype Corsiva", Font.PLAIN, 35));
-		lblLivraria.setBounds(285, 11, 255, 33);
+		lblLivraria.setBounds(274, 11, 257, 26);
 		painelPrincipal.add(lblLivraria);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(41, 29, 717, 517);
+		tabbedPane.setBounds(41, 45, 717, 501);
 		painelPrincipal.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("Pesquisar livro", null, panel, null);
+		tabbedPane.addTab("Pesquisar", null, panel, null);
 		
 		table = new JTable();
 		panel.add(table);
 		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/fundoDosCards.png")));
+		panel.add(label_1);
+		
 		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Adicionar livro", null, panel_1, null);
+		tabbedPane.addTab("Adicionar", null, panel_1, null);
 		panel_1.setLayout(null);
 		
-		JLabel lblAdicionarLivro = new JLabel("ADICIONAR LIVRO");
-		lblAdicionarLivro.setFont(new Font("Arial", Font.ITALIC, 32));
-		lblAdicionarLivro.setBounds(208, 45, 287, 38);
-		panel_1.add(lblAdicionarLivro);
+		JButton btnAdicionarEditora = new JButton("Adicionar Editora");
+		btnAdicionarEditora.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/editoraAdd.png")));
+		btnAdicionarEditora.setBounds(383, 181, 260, 123);
+		panel_1.add(btnAdicionarEditora);
 		
-		JLabel lblTitulo = new JLabel("Titulo:");
-		lblTitulo.setBounds(108, 162, 46, 14);
-		panel_1.add(lblTitulo);
+		JButton btnAdicionarLivro = new JButton("Adicionar Livro");
+		btnAdicionarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LivroAdd livroadd = new LivroAdd();
+				livroadd.setVisible(true);
+			}
+		});
+		btnAdicionarLivro.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/livroAdd.png")));
+		btnAdicionarLivro.setBounds(44, 60, 260, 123);
+		panel_1.add(btnAdicionarLivro);
 		
-		JLabel lblEditora = new JLabel("ID Editora:");
-		lblEditora.setBounds(108, 187, 57, 14);
-		panel_1.add(lblEditora);
+		JButton btnAdicionarAutor = new JButton("Adicionar Autor");
+		btnAdicionarAutor.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/autorAdd.png")));
+		btnAdicionarAutor.setBounds(44, 296, 260, 123);
+		panel_1.add(btnAdicionarAutor);
 		
-		JLabel lblAutor = new JLabel("ID Autor 1:");
-		lblAutor.setBounds(108, 212, 64, 14);
-		panel_1.add(lblAutor);
-		
-		JLabel lblAutor_1 = new JLabel("ID Autor 2:");
-		lblAutor_1.setBounds(391, 212, 64, 14);
-		panel_1.add(lblAutor_1);
-		
-		JLabel lblIsbn = new JLabel("ISBN:");
-		lblIsbn.setBounds(391, 190, 46, 14);
-		panel_1.add(lblIsbn);
-		
-		textField = new JTextField();
-		textField.setBounds(164, 159, 434, 20);
-		panel_1.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(163, 184, 218, 20);
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(423, 184, 175, 20);
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(164, 209, 217, 20);
-		panel_1.add(textField_3);
-		textField_3.setColumns(10);
-		
-		textField_4 = new JTextField();
-		textField_4.setBounds(449, 209, 149, 20);
-		panel_1.add(textField_4);
-		textField_4.setColumns(10);
-		
-		JButton btnNewButton = new JButton("ADICIONAR");
-		btnNewButton.setBounds(255, 357, 189, 23);
-		panel_1.add(btnNewButton);
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/fundoDosCards.png")));
+		label.setBounds(0, 0, 712, 473);
+		panel_1.add(label);
 		
 		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("Deletar livro", null, panel_2, null);
+		tabbedPane.addTab("Deletar", null, panel_2, null);
 		panel_2.setLayout(null);
 		
-		JLabel lblExcluirLivro = new JLabel("EXCLUIR LIVRO");
-		lblExcluirLivro.setBounds(240, 46, 241, 38);
-		lblExcluirLivro.setFont(new Font("Arial", Font.ITALIC, 32));
-		panel_2.add(lblExcluirLivro);
-		
-		JLabel lblparaSuaSeguranca = new JLabel("*Para sua seguranca, a exclus\u00E3o de um livro s\u00F3 pode ser feita pelo seu ISBN.");
-		lblparaSuaSeguranca.setBounds(173, 187, 382, 14);
-		panel_2.add(lblparaSuaSeguranca);
-		
-		JLabel lblIsbn_1 = new JLabel("ISBN");
-		lblIsbn_1.setBounds(343, 274, 46, 14);
-		panel_2.add(lblIsbn_1);
-		
-		textField_5 = new JTextField();
-		textField_5.setBounds(284, 299, 143, 20);
-		panel_2.add(textField_5);
-		textField_5.setColumns(10);
-		
-		JButton btnExcluir = new JButton("EXCLUIR");
-		btnExcluir.setBounds(240, 376, 241, 23);
-		panel_2.add(btnExcluir);
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/fundoDosCards.png")));
+		label_2.setBounds(0, 0, 762, 500);
+		panel_2.add(label_2);
 		
 		JLabel livroEsquerda = new JLabel("");
 		livroEsquerda.setBounds(-85, -76, 526, 715);
