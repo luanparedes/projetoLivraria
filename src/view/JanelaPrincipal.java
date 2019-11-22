@@ -18,6 +18,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class JanelaPrincipal extends JFrame {
 
@@ -50,6 +51,7 @@ public class JanelaPrincipal extends JFrame {
 		painelPrincipal.add(lblSolustechSoftwares);
 		
 		JLabel lblLivraria = new JLabel("Livraria Amazonia");
+		lblLivraria.setForeground(new Color(255, 255, 255));
 		lblLivraria.setFont(new Font("Monotype Corsiva", Font.PLAIN, 35));
 		lblLivraria.setBounds(274, 11, 257, 26);
 		painelPrincipal.add(lblLivraria);
@@ -74,7 +76,7 @@ public class JanelaPrincipal extends JFrame {
 		
 		JButton btnAdicionarEditora = new JButton("Adicionar Editora");
 		btnAdicionarEditora.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/editoraAdd.png")));
-		btnAdicionarEditora.setBounds(383, 181, 260, 123);
+		btnAdicionarEditora.setBounds(383, 181, 291, 123);
 		panel_1.add(btnAdicionarEditora);
 		
 		JButton btnAdicionarLivro = new JButton("Adicionar Livro");
@@ -107,15 +109,10 @@ public class JanelaPrincipal extends JFrame {
 		label_2.setBounds(0, 0, 762, 500);
 		panel_2.add(label_2);
 		
-		JLabel livroEsquerda = new JLabel("");
-		livroEsquerda.setBounds(-85, -76, 526, 715);
-		painelPrincipal.add(livroEsquerda);
-		livroEsquerda.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/livros.png")));
-		
-		JLabel livroDireita = new JLabel("");
-		livroDireita.setBounds(451, -76, 429, 715);
-		painelPrincipal.add(livroDireita);
-		livroDireita.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/livros.png")));
+		JLabel label_3 = new JLabel("");
+		label_3.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/fundo4.png")));
+		label_3.setBounds(0, 0, 794, 571);
+		painelPrincipal.add(label_3);
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
