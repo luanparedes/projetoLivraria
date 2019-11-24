@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.dao.postgres.ConexaoBD;
+
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -21,7 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 public class JanelaPrincipal extends JFrame {
-
+	
 	private JPanel contentPane;
 	private JTable table;
 
@@ -46,14 +49,15 @@ public class JanelaPrincipal extends JFrame {
 		contentPane.add(painelPrincipal);
 		painelPrincipal.setLayout(null);
 		
-		JLabel lblSolustechSoftwares = new JLabel("SolusTech softwares");
-		lblSolustechSoftwares.setBounds(353, 546, 145, 14);
+		JLabel lblSolustechSoftwares = new JLabel("Developed by: Luan Paredes");
+		lblSolustechSoftwares.setForeground(Color.WHITE);
+		lblSolustechSoftwares.setBounds(293, 545, 205, 14);
 		painelPrincipal.add(lblSolustechSoftwares);
 		
 		JLabel lblLivraria = new JLabel("Livraria Amazonia");
 		lblLivraria.setForeground(new Color(255, 255, 255));
 		lblLivraria.setFont(new Font("Monotype Corsiva", Font.PLAIN, 35));
-		lblLivraria.setBounds(274, 11, 257, 26);
+		lblLivraria.setBounds(246, 12, 321, 26);
 		painelPrincipal.add(lblLivraria);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -75,6 +79,12 @@ public class JanelaPrincipal extends JFrame {
 		panel_1.setLayout(null);
 		
 		JButton btnAdicionarEditora = new JButton("Adicionar Editora");
+		btnAdicionarEditora.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditoraAdd editoraAdd = new EditoraAdd();
+				editoraAdd.setVisible(true);
+			}
+		});
 		btnAdicionarEditora.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/editoraAdd.png")));
 		btnAdicionarEditora.setBounds(383, 181, 291, 123);
 		panel_1.add(btnAdicionarEditora);
@@ -87,12 +97,18 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 		btnAdicionarLivro.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/livroAdd.png")));
-		btnAdicionarLivro.setBounds(44, 60, 260, 123);
+		btnAdicionarLivro.setBounds(44, 60, 300, 123);
 		panel_1.add(btnAdicionarLivro);
 		
 		JButton btnAdicionarAutor = new JButton("Adicionar Autor");
+		btnAdicionarAutor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AutorAdd autorAdd = new AutorAdd();
+				autorAdd.setVisible(true);
+			}
+		});
 		btnAdicionarAutor.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/autorAdd.png")));
-		btnAdicionarAutor.setBounds(44, 296, 260, 123);
+		btnAdicionarAutor.setBounds(44, 296, 300, 123);
 		panel_1.add(btnAdicionarAutor);
 		
 		JLabel label = new JLabel("");
@@ -104,14 +120,59 @@ public class JanelaPrincipal extends JFrame {
 		tabbedPane.addTab("Deletar", null, panel_2, null);
 		panel_2.setLayout(null);
 		
+		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LivroDelete livroDelete = new LivroDelete();
+				livroDelete.setVisible(true);
+			}
+		});
+		button.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/livroDelete1.png")));
+		button.setBounds(71, 164, 153, 131);
+		panel_2.add(button);
+		
+		JLabel lblDeletarLivro = new JLabel("Deletar Livro");
+		lblDeletarLivro.setBounds(102, 132, 122, 15);
+		panel_2.add(lblDeletarLivro);
+		
+		JButton button_1 = new JButton("");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditoraDelete editoraDelete = new EditoraDelete();
+				editoraDelete.setVisible(true);
+			}
+		});
+		button_1.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/editoraDelete1.png")));
+		button_1.setBounds(286, 164, 153, 131);
+		panel_2.add(button_1);
+		
+		JButton button_2 = new JButton("");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AutorDelete autorDelete = new AutorDelete();
+				autorDelete.setVisible(true);
+			}
+		});
+		button_2.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/autorDelete1.png")));
+		button_2.setBounds(500, 164, 153, 131);
+		panel_2.add(button_2);
+		
+		JLabel lblDeletarEditora = new JLabel("Deletar Editora");
+		lblDeletarEditora.setBounds(306, 132, 122, 15);
+		panel_2.add(lblDeletarEditora);
+		
+		JLabel lblDeletarAutor = new JLabel("Deletar Autor");
+		lblDeletarAutor.setBounds(531, 132, 122, 15);
+		panel_2.add(lblDeletarAutor);
+		
 		JLabel label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/fundoDosCards.png")));
 		label_2.setBounds(0, 0, 762, 500);
 		panel_2.add(label_2);
 		
 		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/fundo4.png")));
-		label_3.setBounds(0, 0, 794, 571);
+		label_3.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/fundo5.png")));
+		label_3.setBounds(-12, 0, 822, 571);
 		painelPrincipal.add(label_3);
 		
 		setLocationRelativeTo(null);

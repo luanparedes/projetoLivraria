@@ -30,11 +30,11 @@ public class LivroDelete extends JFrame {
 				
 		JLabel lblDeletarLivro = new JLabel("Deletar Livro");
 		lblDeletarLivro.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblDeletarLivro.setBounds(215, 33, 188, 29);
+		lblDeletarLivro.setBounds(205, 31, 188, 29);
 		contentPane.add(lblDeletarLivro);
 		
 		JButton btnDeletar = new JButton("Excluir");
-		btnDeletar.setBounds(360, 305, 89, 23);
+		btnDeletar.setBounds(330, 305, 89, 23);
 		contentPane.add(btnDeletar);
 				
 		JButton btnCancelar = new JButton("Cancelar");
@@ -43,7 +43,7 @@ public class LivroDelete extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(459, 305, 89, 23);
+		btnCancelar.setBounds(430, 305, 118, 23);
 		contentPane.add(btnCancelar);
 		
 		JLabel lblIsbn = new JLabel("ISBN");
@@ -58,7 +58,7 @@ public class LivroDelete extends JFrame {
 		
 		JLabel lblparaASegurana = new JLabel("*Para a seguran\u00E7a de seus dados, s\u00F3 \u00E9 permitido a exclus\u00E3o pelo ISBN.");
 		lblparaASegurana.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblparaASegurana.setBounds(75, 202, 499, 14);
+		lblparaASegurana.setBounds(41, 202, 533, 14);
 		contentPane.add(lblparaASegurana);
 		setLocationRelativeTo(null);
 	}

@@ -19,7 +19,7 @@ public class LivroController {
         			+ "inner join authors au ON (ba.author_id = au.author_id) "
         			+ "inner join publishers pu ON (bo.publisher_id = pu.publisher_id)";
         
-		try(Connection c = ConexaoModel.getConexao()){
+		try(Connection c = ConnectBD.getConexao()){
 			Statement stm = c.createStatement();
 			ResultSet rs = stm.executeQuery(query);
 			

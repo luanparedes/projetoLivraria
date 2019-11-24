@@ -6,15 +6,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.dao.postgres.ConexaoBD;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class TelaLogin extends JFrame {
-
+	
+	public ConexaoBD connect = new ConexaoBD();
 	private JPanel contentPane;
+	private JTextField textField;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -36,6 +44,7 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		connect.connectBD();
 		setResizable(false);
 		setVisible(true);
 		setTitle("Livraria Amazonia - LOGIN");
@@ -58,8 +67,25 @@ public class TelaLogin extends JFrame {
 		btnEntrar.setBounds(102, 206, 231, 23);
 		contentPane.add(btnEntrar);
 		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setBounds(59, 92, 66, 15);
+		contentPane.add(lblUsuario);
+		
+		textField = new JTextField();
+		textField.setBounds(130, 90, 251, 19);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblSenha = new JLabel("Senha:");
+		lblSenha.setBounds(69, 119, 66, 15);
+		contentPane.add(lblSenha);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(130, 117, 251, 19);
+		contentPane.add(passwordField);
+		
 		JLabel imagemFundo = new JLabel("");
-		imagemFundo.setBounds(0, 0, 433, 262);
+		imagemFundo.setBounds(0, -13, 463, 304);
 		imagemFundo.setIcon(new ImageIcon(TelaLogin.class.getResource("/zimages/telaLogin.png")));
 		contentPane.add(imagemFundo);
 		
