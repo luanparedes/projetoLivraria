@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -51,7 +50,7 @@ public class JanelaPrincipal extends JFrame {
 		
 		JLabel lblSolustechSoftwares = new JLabel("Developed by: Luan Paredes");
 		lblSolustechSoftwares.setForeground(Color.WHITE);
-		lblSolustechSoftwares.setBounds(293, 545, 205, 14);
+		lblSolustechSoftwares.setBounds(41, 546, 205, 14);
 		painelPrincipal.add(lblSolustechSoftwares);
 		
 		JLabel lblLivraria = new JLabel("Livraria Amazonia");

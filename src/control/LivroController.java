@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import model.ConexaoModel;
 import model.LivroModel;
+import model.dao.ConexaoBD;
 
 
 public class LivroController {
@@ -19,7 +20,7 @@ public class LivroController {
         			+ "inner join authors au ON (ba.author_id = au.author_id) "
         			+ "inner join publishers pu ON (bo.publisher_id = pu.publisher_id)";
         
-		try(Connection c = ConnectBD.getConexao()){
+		try(Connection c = ConexaoBD.connectBD()){
 			Statement stm = c.createStatement();
 			ResultSet rs = stm.executeQuery(query);
 			
@@ -47,7 +48,7 @@ public class LivroController {
             
         ArrayList<LivroModel> books = new ArrayList<>();
             
-        try(Connection c = ConexaoModel.getConexao()){ 
+        try(Connection c = ConexaoBD.getConexao()){ 
 			PreparedStatement pstm = c.prepareStatement(query);
                         
 			pstm.setString(1, "%"+busca+"%");

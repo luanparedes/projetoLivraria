@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author Luan;
- */
 public class LivroModel {
     
     private String title;
@@ -17,11 +8,8 @@ public class LivroModel {
     private String editora;
 
     
-    public LivroModel(String title, String aAutor, String aEditora, Double aPrice) {
-        this.title = title;
-        this.autor = aAutor;
-        this.editora = aEditora;
-        this.price = aPrice;
+    public LivroModel() {
+        
     }
     
 
