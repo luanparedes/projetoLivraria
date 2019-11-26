@@ -44,7 +44,6 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
-		connect.connectBD();
 		setResizable(false);
 		setVisible(true);
 		setTitle("Livraria Amazonia - LOGIN");
@@ -64,24 +63,24 @@ public class TelaLogin extends JFrame {
 			}
 		});
 		
-		btnEntrar.setBounds(102, 206, 231, 23);
+		btnEntrar.setBounds(183, 147, 73, 38);
 		contentPane.add(btnEntrar);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(59, 92, 66, 15);
+		lblUsuario.setBounds(103, 93, 66, 15);
 		contentPane.add(lblUsuario);
 		
 		textField = new JTextField();
-		textField.setBounds(130, 90, 251, 19);
+		textField.setBounds(148, 90, 174, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setBounds(69, 119, 66, 15);
+		lblSenha.setBounds(103, 120, 66, 15);
 		contentPane.add(lblSenha);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(130, 117, 251, 19);
+		passwordField.setBounds(148, 117, 174, 19);
 		contentPane.add(passwordField);
 		
 		JLabel imagemFundo = new JLabel("");

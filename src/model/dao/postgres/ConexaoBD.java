@@ -15,27 +15,27 @@ public class ConexaoBD {
 	private String DRIVER = "org.postgresql.Driver";
 	private String URL = "jdbc:postgresql:postgres";
 	private String USER = "postgres";
-	private String PASS = "101017";
+	private String PASS = "123456";
 	
 	public void connectBD() {
 		try {
 			System.setProperty("jdcb.Drivers", DRIVER);
 			conn = DriverManager.getConnection(URL, USER, PASS);
-			System.out.println("Conexão realizada com sucesso");
+			System.out.println("Conexao realizada com sucesso");
 		}
 		catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "ERRO ao se conectar ao DataBase!!!\n" + e.getMessage());
 			e.printStackTrace();
-			System.out.println("Conexão NÃO realizada!");
+			System.out.println("Conexao NAO realizada!");
 		}
 	}
 	
 	public void disconectBD() {
 		try {
 			conn.close();
-			JOptionPane.showMessageDialog(null, "DataBase desconectado com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("Erro ao desconectar do DataBase!");
 			JOptionPane.showMessageDialog(null, "ERRO ao desconectar do DataBase!!!\n" + e.getMessage());
 		}
 	}

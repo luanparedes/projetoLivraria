@@ -14,8 +14,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class EditoraAdd extends JFrame {
+import control.EditoraControl;
+import model.EditoraModel;
 
+public class EditoraAdd extends JFrame {
+	
+	EditoraModel editora = new EditoraModel();
+	EditoraControl controle = new EditoraControl();
+	
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -36,7 +42,7 @@ public class EditoraAdd extends JFrame {
 		lblDeletarLivro.setBounds(177, 23, 261, 29);
 		contentPane.add(lblDeletarLivro);
 		
-		JLabel lblCdigo = new JLabel("Código:");
+		JLabel lblCdigo = new JLabel("Codigo:");
 		lblCdigo.setBounds(153, 159, 66, 15);
 		contentPane.add(lblCdigo);
 		
@@ -64,6 +70,14 @@ public class EditoraAdd extends JFrame {
 		contentPane.add(textField_2);
 		
 		JButton button = new JButton("Adicionar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editora.setPublisher_id(Integer.parseInt(textField.getText()));
+				editora.setName(textField_1.getText());
+				editora.setUrl(textField_2.getText());
+				controle.salvarEditora(editora);
+			}
+		});
 		button.setBounds(321, 313, 132, 23);
 		contentPane.add(button);
 		
