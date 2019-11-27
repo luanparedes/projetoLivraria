@@ -13,12 +13,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class LivroDelete extends JFrame {
+import control.LivroControl;
+import model.LivroModel;
 
+import java.awt.BorderLayout;
+
+public class LivroDelete extends JFrame {
+	
+	LivroControl controle = new LivroControl();
 	private JPanel contentPane;
 	private JTextField textField;
-
+	public String isbn;
+	
 	public LivroDelete() {
+		getContentPane().setLayout(null);
 		setTitle("Livraria Amazonia - Adicionar Livro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -34,6 +42,13 @@ public class LivroDelete extends JFrame {
 		contentPane.add(lblDeletarLivro);
 		
 		JButton btnDeletar = new JButton("Excluir");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				isbn = textField.getText();
+				controle.deletarLivro(isbn);
+				setVisible(false);
+			}
+		});
 		btnDeletar.setBounds(330, 305, 89, 23);
 		contentPane.add(btnDeletar);
 				
@@ -56,11 +71,10 @@ public class LivroDelete extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblparaASegurana = new JLabel("*Para a seguran\u00E7a de seus dados, s\u00F3 \u00E9 permitido a exclus\u00E3o pelo ISBN.");
+		JLabel lblparaASegurana = new JLabel("*Para a seguranca de seus dados, so e permitido a exclusao pelo ISBN.");
 		lblparaASegurana.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		lblparaASegurana.setBounds(41, 202, 533, 14);
 		contentPane.add(lblparaASegurana);
 		setLocationRelativeTo(null);
 	}
-
 }

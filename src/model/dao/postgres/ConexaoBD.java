@@ -15,7 +15,7 @@ public class ConexaoBD {
 	private String DRIVER = "org.postgresql.Driver";
 	private String URL = "jdbc:postgresql:postgres";
 	private String USER = "postgres";
-	private String PASS = "123456";
+	private String PASS = "101017";
 	
 	public void connectBD() {
 		try {

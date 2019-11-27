@@ -26,7 +26,23 @@ public class LivroControl {
 			JOptionPane.showMessageDialog(null, "Adicionado com sucesso!");
 		} catch (SQLException e) {
 			System.out.println("Nao foi possivel salvar esse livro!");
-			JOptionPane.showMessageDialog(null, "Não foi possível salvar esse livro!\n" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel salvar esse livro!\n" + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		connect.disconectBD();
+	}
+	
+	public void deletarLivro(String isbn) {
+		connect.connectBD();
+		try {
+			PreparedStatement pst = connect.conn.prepareStatement("DELETE FROM books WHERE isbn = '"+ isbn +"'");
+			pst.execute();
+			System.out.println("Livro excluido com sucesso!");
+			JOptionPane.showMessageDialog(null, "Livro excluido com sucesso!!!");
+		} catch (SQLException e) {
+			System.out.println("NÃ£o foi possÃ­vel excluir esse livro!\n" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Nao foi possivel deletar este livro\n" + e.getMessage());
 			e.printStackTrace();
 		}
 		

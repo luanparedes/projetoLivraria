@@ -14,8 +14,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class AutorAdd extends JFrame {
+import control.AutorControl;
+import model.AutorModel;
 
+public class AutorAdd extends JFrame {
+	
+	AutorModel autor = new AutorModel();
+	AutorControl controle = new AutorControl();
+	
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -49,6 +55,15 @@ public class AutorAdd extends JFrame {
 		contentPane.add(lblUrl);
 				
 		JButton button = new JButton("Adicionar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				autor.setAuthor_id(Integer.parseInt(textField.getText()));
+				autor.setName(textField_1.getText());
+				autor.setFname(textField_2.getText());
+				controle.salvarAutor(autor);
+				setVisible(false);
+			}
+		});
 		button.setBounds(321, 313, 132, 23);
 		contentPane.add(button);
 		
