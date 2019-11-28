@@ -1,49 +1,67 @@
 package model;
 
+import control.LivroController;
+import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.table.AbstractTableModel;
 
 public class ModeloTabela extends AbstractTableModel{
+    
+	private ArrayList<PrincipalModel> dados = new ArrayList<>();
 	
-	private ArrayList linhas = null;
-	private String[] colunas = null;
-	
-	public ModeloTabela(ArrayList lin, String[] col) {
-		setLinhas(lin);
-		setColunas(col);
-	}
-	
-	public ArrayList getLinhas() {
-		return linhas;
-	}
+    public ModeloTabela() throws SQLException{
+        dados = LivroController.listaLivrosCompleto();
+       
+    }
 
-	public void setLinhas(ArrayList linhas) {
-		this.linhas = linhas;
-	}
+    public void setDados(ArrayList<PrincipalModel> dados) {
+        this.dados = dados;
+    }
+    
+    public ArrayList<PrincipalModel> getDados() {
+        return this.dados;
+        
+    }
+   
+    //Coluans da tabela
+    private String[] colunas = {"Titulo","Autores", "Editoras","Preco"};
 
-	public String[] getColunas() {
-		return colunas;
-	}
+    @Override
+    public String getColumnName(int coluna) {
+        return colunas[coluna];
+    }
+    
+    
+    @Override
+    public int getRowCount() {
+        return dados.size();
+    }
 
-	public void setColunas(String[] colunas) {
-		this.colunas = colunas;
-	}
-	
-	public int getColumnCount() {
-		return colunas.length;
-	}
-	
-	public int getRowCount() {
-		return linhas.size();
-	}
-	
-	public String getColumnName(int numCol) {
-		return colunas[numCol];
-	}
-	
-	public Object getValueAt(int numLin, int numCol) {
-		Object[] linha = (Object[])getLinhas().get(numLin);
-		return linha[numCol];
-	}
+    @Override
+    public int getColumnCount() {
+        return colunas.length;
+    }
+    
+    //Exibe as linhas da tabela
+    @Override
+    public Object getValueAt(int linha, int coluna) {
+        
+        switch(coluna){
+            case 0:
+                return dados.get(linha).getTitle();
+            case 1:
+                return dados.get(linha).getAuthor();
+            case 2:
+                return dados.get(linha).getPublisher();
+            case 3:
+                return dados.get(linha).getPrice();
+        }
+        return null;
+    }
+    
+    //atualiza a tabela, para mostrar as alteracoes feitas 
+    public void atualizaTable(){
+        this.fireTableDataChanged();
+    }
+    
 }

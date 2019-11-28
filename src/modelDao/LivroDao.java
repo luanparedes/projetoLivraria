@@ -15,12 +15,16 @@ public class LivroDao {
 	
 	public LivroModel pesquisaPrincipal(LivroModel livro) {
 		connect.connectBD();
-		connect.executaSQL("SELECT * FROM books WHERE title LIKE '%" + livro.getPesquisa() + "%");
+		connect.executaSQL("select distinct bo.Title, au.fname, pu.name, bo.price from books bo\r\n" + 
+				"inner join booksauthors ba ON (bo.isbn = ba.isbn)\r\n" + 
+				"inner join authors au ON (ba.author_id = au.author_id)\r\n" + 
+				"inner join publishers pu ON (bo.publisher_id = pu.publisher_id" +
+				" WHERE title LIKE '%" + livro.getPesquisa() + "%'");
 		try {		
 			connect.rs.first();
 			livro.setTitle(connect.rs.getString("title"));
-			livro.setIsbn(connect.rs.getString("isbn"));
-			livro.setPublisher_id(connect.rs.getInt("publisher_id"));
+			livro.setIsbn(connect.rs.getString("name"));
+			livro.setPublisher_id(connect.rs.getInt("fname"));
 			livro.setPrice(connect.rs.getDouble("price"));
 		} catch(SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro ao pesquisar!");
@@ -34,7 +38,7 @@ public class LivroDao {
 	
 	public LivroModel pesquisarLivro(LivroModel livro) {
 		connect.connectBD();
-		connect.executaSQL("SELECT * FROM books WHERE title LIKE '%" + livro.getPesquisa() + "%");
+		connect.executaSQL("SELECT * FROM books WHERE title LIKE '%" + livro.getPesquisa() + "%'");
 		try {		
 			connect.rs.first();
 			livro.setTitle(connect.rs.getString("title"));

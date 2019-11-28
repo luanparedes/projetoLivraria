@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-public class ConexaoBD {
+public class ConexaoBD{
 	public Statement stm;
 	public ResultSet rs;
 	public Connection conn;
@@ -30,12 +30,14 @@ public class ConexaoBD {
 		}
 	}
 	
-	public void executaSQL(String sql) {
+	public ResultSet executaSQL(String sql) {
 		try {
 			stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
 			rs = stm.executeQuery(sql);
+			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
@@ -48,4 +50,6 @@ public class ConexaoBD {
 			JOptionPane.showMessageDialog(null, "ERRO ao desconectar do DataBase!!!\n" + e.getMessage());
 		}
 	}
+	
+	
 }

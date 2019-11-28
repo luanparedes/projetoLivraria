@@ -36,6 +36,7 @@ public class TelaLogin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					TelaLogin frame = new TelaLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -61,10 +62,11 @@ public class TelaLogin extends JFrame {
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
+				janelaPrincipal.preencherTabela("SELECT * FROM books ORDER BY title");
 				janelaPrincipal.setVisible(true);
+				
 				setVisible(false);
 				}
 		});
@@ -95,6 +97,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(imagemFundo);
 		
 		setLocationRelativeTo(null);
+		
 	}
 }
 

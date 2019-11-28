@@ -1,9 +1,8 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import model.LivroModel;
@@ -20,14 +19,19 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
-import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
-import javax.swing.JMenu;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollBar;
+import java.awt.ScrollPane;
 
 public class JanelaPrincipal extends JFrame {
 	
@@ -36,10 +40,11 @@ public class JanelaPrincipal extends JFrame {
 	LivroDao controle = new LivroDao();
 	private JPanel contentPane;
 	private JTextField textField;
+	private JTable table_1;
 	private JTable table;
 
 	public JanelaPrincipal() {
-		preencherTabela("SELECT * FROM books ORDER BY title");
+		
 		setResizable(false);
 		setTitle("Livraria Amazonia");
 		setMaximumSize(new Dimension(800, 600));
@@ -98,9 +103,15 @@ public class JanelaPrincipal extends JFrame {
 		btnOk.setBounds(539, 73, 53, 25);
 		panel.add(btnOk);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 130, 692, 333);
+		panel.add(scrollPane);
+		
 		table = new JTable();
-		table.setBounds(91, 118, 405, 344);
-		panel.add(table);
+		scrollPane.setViewportView(table);
+		table.setBounds(186, 350, 208, -127);
+		
+		
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setBounds(-44, -39, 800, 597);
@@ -212,9 +223,17 @@ public class JanelaPrincipal extends JFrame {
 		setVisible(true);
 	}
 	
+	 private void PesquisaBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisaBotaoActionPerformed
+
+        String texto = textField.getText();
+        modeloTabela.setDados(LivroController.buscaLivrosCompleto(texto));
+        modeloTabela.atualizaTable(); 
+	        
+	 }
+	
 	public void preencherTabela(String sql) {
 		ArrayList dados = new ArrayList();
-		String[] colunas = new String[] {"Título", "ISBN", "Editora", "Preço"};
+		String[] colunas = new String[] {"Titulo", "ISBN", "Editora", "Preco"};
 		connect.connectBD();
 		connect.executaSQL(sql);
 		try {
@@ -230,13 +249,13 @@ public class JanelaPrincipal extends JFrame {
 		}
 		System.out.println("teste");
 		ModeloTabela modelo_tabela = new ModeloTabela(dados, colunas);
-		table.setModel(modelo_tabela);
-		table.getColumnModel().getColumn(0).setPreferredWidth(180);
-		table.getColumnModel().getColumn(1).setPreferredWidth(60);
-		table.getColumnModel().getColumn(2).setPreferredWidth(180);
-		table.getColumnModel().getColumn(3).setPreferredWidth(60);
+		this.table.setModel(modelo_tabela);
+		table.getColumnModel().getColumn(0).setPreferredWidth(350);
+		table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setPreferredWidth(130);
+		table.getColumnModel().getColumn(3).setPreferredWidth(70);
 		table.getTableHeader().setReorderingAllowed(false);
-		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		connect.disconectBD();

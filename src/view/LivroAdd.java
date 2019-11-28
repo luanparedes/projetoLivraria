@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.LivroModel;
+import model.ModeloTabela;
 import modelDao.LivroDao;
 
 import java.awt.Color;
@@ -21,6 +22,7 @@ import javax.swing.JTable;
 
 public class LivroAdd extends JFrame {
 	
+	ModeloTabela table = new ModeloTabela();
 	LivroModel livro = new LivroModel();
 	LivroDao controle = new LivroDao();
 	
