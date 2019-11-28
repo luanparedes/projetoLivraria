@@ -34,5 +34,4 @@ public class EditoraModel {
 		this.url = url;
 	}
 	
-	
 }

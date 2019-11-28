@@ -1,4 +1,4 @@
-package control;
+package modelDao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,10 +8,47 @@ import javax.swing.JOptionPane;
 import model.LivroModel;
 import model.dao.postgres.ConexaoBD;
 
-public class LivroControl {
+public class LivroDao {
 	
 	ConexaoBD connect = new ConexaoBD();
 	LivroModel modelo = new LivroModel();
+	
+	public LivroModel pesquisaPrincipal(LivroModel livro) {
+		connect.connectBD();
+		connect.executaSQL("SELECT * FROM books WHERE title LIKE '%" + livro.getPesquisa() + "%");
+		try {		
+			connect.rs.first();
+			livro.setTitle(connect.rs.getString("title"));
+			livro.setIsbn(connect.rs.getString("isbn"));
+			livro.setPublisher_id(connect.rs.getInt("publisher_id"));
+			livro.setPrice(connect.rs.getDouble("price"));
+		} catch(SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao pesquisar!");
+			System.out.println("Erro de pesquisa!");
+			e.printStackTrace();
+		}
+		
+		connect.disconectBD();
+		return livro;
+	}
+	
+	public LivroModel pesquisarLivro(LivroModel livro) {
+		connect.connectBD();
+		connect.executaSQL("SELECT * FROM books WHERE title LIKE '%" + livro.getPesquisa() + "%");
+		try {		
+			connect.rs.first();
+			livro.setTitle(connect.rs.getString("title"));
+			livro.setIsbn(connect.rs.getString("isbn"));
+			livro.setPublisher_id(connect.rs.getInt("publisher_id"));
+			livro.setPrice(connect.rs.getDouble("price"));
+		} catch(SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao pesquisar livro!");
+			System.out.println("Não existe esse livro no sistema!");
+		}
+		
+		connect.disconectBD();
+		return livro;
+	}
 	
 	public void salvarLivro(LivroModel modelo) {
 		connect.connectBD();

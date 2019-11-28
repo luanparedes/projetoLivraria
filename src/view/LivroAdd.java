@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import control.LivroControl;
 import model.LivroModel;
+import modelDao.LivroDao;
 
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -22,7 +22,7 @@ import javax.swing.JTable;
 public class LivroAdd extends JFrame {
 	
 	LivroModel livro = new LivroModel();
-	LivroControl controle = new LivroControl();
+	LivroDao controle = new LivroDao();
 	
 	private JPanel contentPane;
 	private JTextField textField;

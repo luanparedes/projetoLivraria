@@ -13,8 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class EditoraDelete extends JFrame {
+import model.EditoraModel;
+import modelDao.EditoraDao;
 
+public class EditoraDelete extends JFrame {
+	
+	EditoraModel editora = new EditoraModel();
+	EditoraDao controle = new EditoraDao();
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -34,6 +39,13 @@ public class EditoraDelete extends JFrame {
 		contentPane.add(lblDeletarLivro);
 		
 		JButton btnDeletar = new JButton("Excluir");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editora.setPublisher_id(Integer.parseInt(textField.getText()));
+				controle.deletarEditora(editora);
+				setVisible(false);
+			}
+		});
 		btnDeletar.setBounds(330, 305, 89, 23);
 		contentPane.add(btnDeletar);
 				

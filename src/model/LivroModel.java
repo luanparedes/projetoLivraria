@@ -6,9 +6,10 @@ public class LivroModel {
     private String isbn;
     private int publisher_id;
     private double price;
+    private String pesquisa;
 
-    
-    public LivroModel() {
+
+	public LivroModel() {
         
     }
 
@@ -52,5 +53,13 @@ public class LivroModel {
 		this.price = price;
 	}
     
-    
+	
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
 }

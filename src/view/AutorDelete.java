@@ -14,8 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class AutorDelete extends JFrame {
+import model.AutorModel;
+import modelDao.AutorDao;
 
+public class AutorDelete extends JFrame {
+	
+	AutorModel autor = new AutorModel();
+	AutorDao controle = new AutorDao();
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -35,6 +40,13 @@ public class AutorDelete extends JFrame {
 		contentPane.add(lblDeletarLivro);
 		
 		JButton btnDeletar = new JButton("Excluir");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				autor.setAuthor_id(Integer.parseInt(textField.getText()));
+				controle.deletarAutor(autor);
+				setVisible(false);
+			}
+		});
 		btnDeletar.setBounds(330, 305, 89, 23);
 		contentPane.add(btnDeletar);
 				

@@ -14,13 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import control.AutorControl;
 import model.AutorModel;
+import modelDao.AutorDao;
 
 public class AutorAdd extends JFrame {
 	
 	AutorModel autor = new AutorModel();
-	AutorControl controle = new AutorControl();
+	AutorDao controle = new AutorDao();
 	
 	private JPanel contentPane;
 	private JTextField textField;

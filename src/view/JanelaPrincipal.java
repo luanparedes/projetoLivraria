@@ -6,7 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.LivroModel;
+import model.ModeloTabela;
 import model.dao.postgres.ConexaoBD;
+import modelDao.LivroDao;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
@@ -15,19 +18,28 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 public class JanelaPrincipal extends JFrame {
 	
+	ConexaoBD connect = new ConexaoBD();
+	LivroModel livro = new LivroModel();
+	LivroDao controle = new LivroDao();
 	private JPanel contentPane;
+	private JTextField textField;
 	private JTable table;
 
 	public JanelaPrincipal() {
+		preencherTabela("SELECT * FROM books ORDER BY title");
 		setResizable(false);
 		setTitle("Livraria Amazonia");
 		setMaximumSize(new Dimension(800, 600));
@@ -65,11 +77,33 @@ public class JanelaPrincipal extends JFrame {
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Pesquisar", null, panel, null);
+		panel.setLayout(null);
+		
+		JLabel lblPesquisa = new JLabel("Pesquisa:");
+		lblPesquisa.setBounds(139, 78, 66, 15);
+		panel.add(lblPesquisa);
+		
+		textField = new JTextField();
+		textField.setBounds(210, 76, 325, 19);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				livro.setPesquisa(textField.getText());
+				LivroModel modelo = controle.pesquisarLivro(livro);
+			}
+		});
+		btnOk.setBounds(539, 73, 53, 25);
+		panel.add(btnOk);
 		
 		table = new JTable();
+		table.setBounds(91, 118, 405, 344);
 		panel.add(table);
 		
 		JLabel label_1 = new JLabel("");
+		label_1.setBounds(-44, -39, 800, 597);
 		label_1.setIcon(new ImageIcon(JanelaPrincipal.class.getResource("/zimages/fundoDosCards.png")));
 		panel.add(label_1);
 		
@@ -176,5 +210,35 @@ public class JanelaPrincipal extends JFrame {
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
+	}
+	
+	public void preencherTabela(String sql) {
+		ArrayList dados = new ArrayList();
+		String[] colunas = new String[] {"Título", "ISBN", "Editora", "Preço"};
+		connect.connectBD();
+		connect.executaSQL(sql);
+		try {
+			connect.rs.first();
+			do {
+				dados.add(new Object[]{connect.rs.getString("title"), connect.rs.getString("isbn"),
+									   connect.rs.getInt("publisher_id"), connect.rs.getDouble("price")
+				});
+			}while(connect.rs.next());	
+		} catch(SQLException e) {
+			JOptionPane.showMessageDialog(rootPane, "Erro ao preencher ArrayList!\n" + e.getMessage());
+			e.printStackTrace();
+		}
+		System.out.println("teste");
+		ModeloTabela modelo_tabela = new ModeloTabela(dados, colunas);
+		table.setModel(modelo_tabela);
+		table.getColumnModel().getColumn(0).setPreferredWidth(180);
+		table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(2).setPreferredWidth(180);
+		table.getColumnModel().getColumn(3).setPreferredWidth(60);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		connect.disconectBD();
 	}
 }

@@ -13,14 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import control.LivroControl;
 import model.LivroModel;
+import modelDao.LivroDao;
 
 import java.awt.BorderLayout;
 
 public class LivroDelete extends JFrame {
 	
-	LivroControl controle = new LivroControl();
+	LivroDao controle = new LivroDao();
 	private JPanel contentPane;
 	private JTextField textField;
 	public String isbn;

@@ -14,13 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import control.EditoraControl;
 import model.EditoraModel;
+import modelDao.EditoraDao;
 
 public class EditoraAdd extends JFrame {
 	
 	EditoraModel editora = new EditoraModel();
-	EditoraControl controle = new EditoraControl();
+	EditoraDao controle = new EditoraDao();
 	
 	private JPanel contentPane;
 	private JTextField textField;
@@ -76,6 +76,7 @@ public class EditoraAdd extends JFrame {
 				editora.setName(textField_1.getText());
 				editora.setUrl(textField_2.getText());
 				controle.salvarEditora(editora);
+				setVisible(false);
 			}
 		});
 		button.setBounds(321, 313, 132, 23);

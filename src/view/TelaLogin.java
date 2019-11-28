@@ -7,9 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.UsuarioModel;
 import model.dao.postgres.ConexaoBD;
+import modelDao.UsuarioDao;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -19,6 +22,8 @@ import javax.swing.JPasswordField;
 
 public class TelaLogin extends JFrame {
 	
+	UsuarioModel user = new UsuarioModel();
+	UsuarioDao controle = new UsuarioDao();
 	public ConexaoBD connect = new ConexaoBD();
 	private JPanel contentPane;
 	private JTextField textField;
@@ -56,11 +61,12 @@ public class TelaLogin extends JFrame {
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
 				janelaPrincipal.setVisible(true);
 				setVisible(false);
-			}
+				}
 		});
 		
 		btnEntrar.setBounds(183, 147, 73, 38);
